@@ -29,6 +29,13 @@ spec:
   selector:
     app: tcp-echo
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tcp-echo
+  labels:
+    account: tcp-echo
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,14 +46,15 @@ spec:
     matchLabels:
       app: tcp-echo
       version: v1
-    annotations:
-      consul.hashicorp.com/connect-inject: "true"
   template:
     metadata:
       labels:
         app: tcp-echo
         version: v1
+      annotations:
+        consul.hashicorp.com/connect-inject: "true"
     spec:
+      serviceAccountName: tcp-echo
       containers:
       - name: tcp-echo
         image: docker.io/istio/tcp-echo-server:1.2
