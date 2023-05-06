@@ -1,0 +1,36 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: IngressGateway
+metadata:
+  name: ingress-gateway
+spec:
+  listeners:
+    - port: 8080
+      protocol: http
+      services:
+        - name: productpage
+          hosts:
+          - "*"
+    - port: 8443
+      protocol: tcp
+      services:
+        - name: tcp-echo
+          hosts:
+          - "*"
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceDefaults
+metadata:
+  name: tcp-echo
+spec:
+  protocol: tcp
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: tcp-echo
+spec:
+  destination: 
+    name: tcp-echo
+  sources:
+    - name: ingress-gateway
+      action: allow
