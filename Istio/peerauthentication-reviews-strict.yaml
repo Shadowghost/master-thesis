@@ -1,0 +1,10 @@
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: "reviews-strict-mtls"
+spec:
+  selector:
+    matchLabels:
+      app: reviews
+    mtls:
+    mode: STRICT

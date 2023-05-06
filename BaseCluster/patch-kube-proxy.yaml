@@ -1,0 +1,6 @@
+...
+data:
+  config.conf: |-
+    ipvs:
+    strictARP: true
+...

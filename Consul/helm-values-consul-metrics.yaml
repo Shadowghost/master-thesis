@@ -1,0 +1,46 @@
+global:
+  enabled: true
+  name: consul
+  datacenter: thesis
+  acls:
+    manageSystemACLs: true
+  tls:
+    enabled: true
+    enableAutoEncryption: true
+  metrics:
+    enabled: true
+    enableAgentMetrics: true
+    agentMetricsRetentionTime: "1m"
+server:
+  enabled: true
+  replicas: 1
+ui:
+  enabled: true
+  service:
+    type: LoadBalancer
+  metrics:
+    enabled: true
+connectInject:
+  enabled: true
+  default: true
+  cni:
+    enabled: true
+  namespaceSelector: |
+    matchLabels:
+      connect-inject: enabled
+  metrics:
+    defaultEnabled: true
+    defaultEnableMerging: true
+ingressGateways:
+  enabled: true
+  gateways:
+    - name: ingress-gateway
+      service:
+        type: LoadBalancer
+      ports:
+      - port: 8080
+        nodePort: null
+      - port: 8443
+        nodePort: null
+prometheus:
+  enabled: true

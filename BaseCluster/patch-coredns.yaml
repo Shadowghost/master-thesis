@@ -1,0 +1,35 @@
+...
+data:
+  Corefile: |
+    .:53 {
+      errors
+      health {
+        lameduck 5s
+      }
+      hosts {
+        192.168.81.130 base.example.org
+        192.168.81.131 cluster-endpoint.example.org
+        192.168.81.131 master1.example.org
+        192.168.81.132 master2.example.org
+        192.168.81.133 master3.example.org
+        192.168.81.141 worker1.example.org
+        192.168.81.142 worker1.example.org
+        192.168.81.143 worker1.example.org
+        fallthrough
+      }
+      ready
+      kubernetes cluster.local in-addr.arpa ip6.arpa {
+        pods insecure
+        fallthrough in-addr.arpa ip6.arpa
+        ttl 30
+      }
+      prometheus :9153
+      forward . /etc/resolv.conf {
+        max_concurrent 1000
+      }
+      cache 30
+      loop
+      reload
+      loadbalance
+    }
+...

@@ -1,0 +1,27 @@
+global:
+  enabled: true
+  name: consul
+  datacenter: thesis
+  acls:
+    manageSystemACLs: true
+server:
+  enabled: true
+  replicas: 1
+ui:
+  enabled: true
+  service:
+    type: LoadBalancer
+connectInject:
+  enabled: true
+  default: true
+  cni:
+    enabled: true
+  namespaceSelector: |
+  matchLabels:
+    connect-inject: enabled
+ingressGateways:
+  enabled: true
+  gateways:
+    - name: ingress-gateway
+      service:
+        type: LoadBalancer
