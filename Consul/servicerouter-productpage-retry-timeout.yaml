@@ -21,6 +21,6 @@ spec:
         service: ratings
     - destination:
         service: productpage
-        requestTimeout: 1s
+        requestTimeout: 1ms
         numRetries: 3
         retryOnConnectFailure: true
