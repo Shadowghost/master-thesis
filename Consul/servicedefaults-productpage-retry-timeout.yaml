@@ -1,0 +1,17 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceDefaults
+metadata:
+  name: productpage
+spec:
+  protocol: http
+  upstreamConfig:
+    defaults:
+      ConnectTimeoutMs: 5
+      limits: 
+        maxConnections: 1
+        maxPendingRequests: 1
+        maxConcurrentRequests: 1
+      passiveHealthCheck: 
+        interval: 0s
+        maxFailures: 1
+        enforcingConsecutive5xx: 100

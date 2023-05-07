@@ -1,0 +1,8 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceResolver
+metadata:
+  name: productpage
+spec:
+  defaultSubset: v1
+  loadBalancer:
+    policy: least_request
