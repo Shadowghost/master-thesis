@@ -1,0 +1,26 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceRouter
+metadata:
+  name: productpage
+spec:
+  routes:
+    - match:
+        http:
+          pathPrefix: /reviews
+      destination:
+        service: reviews
+    - match:
+        http:
+          pathPrefix: /details
+      destination:
+        service: details
+    - match:
+        http:
+          pathPrefix: /ratings
+      destination:
+        service: ratings
+    - destination:
+        service: productpage
+        requestTimeout: 1s
+        numRetries: 3
+        retryOnConnectFailure: true

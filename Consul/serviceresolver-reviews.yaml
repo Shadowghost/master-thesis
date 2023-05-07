@@ -3,7 +3,6 @@ kind: ServiceResolver
 metadata:
   name: reviews
 spec:
-  defaultSubset: v1
   subsets:
     v1:
       filter: 'Service.Meta.version == v1'
